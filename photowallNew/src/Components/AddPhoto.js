@@ -23,7 +23,8 @@ class AddPhoto extends Component{
     }
 
     if(description && imageLink){
-      this.props.onAddPhoto(post)
+      this.props.addPost(post)
+      this.props.onHistory.push('/')
     }
   }
 
@@ -33,7 +34,7 @@ class AddPhoto extends Component{
         
         <div>
 
-          <h1>PhotoWall</h1>
+       
 
           <div className="form">
             <form onSubmit={this.handleSubmit}> 
