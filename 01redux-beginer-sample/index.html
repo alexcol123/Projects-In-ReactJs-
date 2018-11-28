@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Document</title>
+  </head>
+
+  <style>
+    body {
+      color: red;
+
+      background: beige;
+    }
+  </style>
+
+  <body>
+    <h2>Redux</h2>
+    <h4>Look at the console</h4>
+
+    <h3>Steps</h3>
+    <ol>
+      <li>Get store</li>
+      <li>Create store</li>
+      <li>Create reducers</li>
+      <li>Create initial state</li>
+      <li>Create actions and dispatch them</li>
+      <li>Subscribe to store</li>
+    </ol>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.5.2/redux.js"
+      type="text/javascript"
+    ></script>
+
+    <script>
+      // 1 get store
+      const { createStore } = Redux;
+
+      // 4 create initial state
+      const initialState = {
+        todos: [],
+        posts: []
+      };
+
+      //3 create reducers
+      function myreducer(state = initialState, action) {
+        if (action.type == 'ADD_TODO') {
+          return {
+            ...state,
+            todos: [...state.todos, action.todo]
+          };
+        }
+
+        if (action.type == 'ADD_POST') {
+          return {
+            ...state,
+            posts: [...state.posts, action.post]
+          };
+        }
+      }
+
+      // 2 Create Store
+      const store = createStore(myreducer);
+
+      //6 subscribte to  store
+      store.subscribe(() => {
+        console.log('state updated');
+        console.log(store.getState());
+      });
+
+      // 5 create actons and dispatch them
+      store.dispatch({ type: 'ADD_POST', post: 'conseguir clientes' });
+      store.dispatch({ type: 'ADD_TODO', todo: 'Laver carro' });
+
+      store.dispatch({ type: 'ADD_TODO', todo: 'Devolver Jacket Ethan' });
+    </script>
+  </body>
+</html>
